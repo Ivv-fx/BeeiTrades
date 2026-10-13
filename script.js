@@ -121,7 +121,7 @@ function activeNav(route) {
   document.querySelector("#mobile-title").textContent = titleFor(route);
 }
 function header(title) {
-  return `<div class="page-heading"><div><div class="overline">NORTHSTAR LEARNING SPACE</div><h1>${title}</h1></div></div>`;
+  return `<div class="page-heading"><div><div class="overline">NAMOH TRADES LEARNING SPACE</div><h1>${title}</h1></div></div>`;
 }
 function pageIntro(title, description, eyebrow = "YOUR LEARNING SPACE") {
   return `<section class="intro"><div class="overline">${eyebrow}</div><h1>${title}</h1><p>${description}</p></section>`;
@@ -348,7 +348,7 @@ function signInPage() {
       ? ""
       : `<button class="button button-primary google-sign-in" data-action="google-sign-in"><span class="google-mark" aria-hidden="true">G</span>Continue with Google</button>`;
   return `<main class="auth-gate"><div class="auth-card">
-    <div class="auth-brand"><span class="brand-symbol">✳</span><span>NORTHSTAR</span></div>
+    <div class="auth-brand"><span class="brand-symbol">✳</span><span>Namoh Trades</span></div>
     <div class="overline">YOUR PRIVATE LEARNING SPACE</div>
     <h1>${authStatus === "loading" ? "Welcome back" : "Sign in to continue"}</h1>
     <p>${escapeHtml(message)}</p>
@@ -391,7 +391,7 @@ function render() {
   if (!firebaseConfigured || authStatus !== "signed-in") {
     document.body.dataset.authState = "signed-out";
     content.innerHTML = signInPage();
-    document.title = "Sign in — Northstar";
+    document.title = "Sign in — Namoh Trades";
     return;
   }
   document.body.dataset.authState = "signed-in";
@@ -400,7 +400,7 @@ function render() {
   const pages = { home: homePage, learn: learnPage, videos: videosPage, saved: savedPage, sessions: sessionsPage, perks: perksPage, membership: membershipPage, settings: settingsPage, upgrade: upgradePage };
   const html = route === "lesson" ? lessonPage(getParam("id")) : route === "category" ? categoryPage(getParam("id")) : (pages[route] || homePage)();
   document.querySelector("#page-content").innerHTML = html;
-  document.title = `${titleFor(route)} — Northstar`;
+  document.title = `${titleFor(route)} — Namoh Trades`;
   document.body.dataset.theme = state.theme === "system"
     ? (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
     : state.theme;
