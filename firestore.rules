@@ -1,0 +1,66 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function ownsUser(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validWorkspaceDocument() {
+      let data = request.resource.data;
+      let workspace = data.data;
+      return data.keys().hasAll(['data', 'updatedAt'])
+        && data.keys().hasOnly(['data', 'updatedAt'])
+        && data.updatedAt == request.time
+        && workspace is map
+        && workspace.keys().hasAll([
+          'saved', 'folders', 'notes', 'completed', 'reminders', 'progress',
+          'notificationsRead', 'theme', 'settingsTab', 'preferences'
+        ])
+        && workspace.keys().hasOnly([
+          'saved', 'folders', 'notes', 'completed', 'reminders', 'progress',
+          'notificationsRead', 'theme', 'settingsTab', 'preferences'
+        ])
+        && workspace.saved is list && workspace.saved.size() <= 1000
+        && workspace.folders is list && workspace.folders.size() <= 1000
+        && workspace.notes is list && workspace.notes.size() <= 1000
+        && workspace.completed is list && workspace.completed.size() <= 1000
+        && workspace.reminders is list && workspace.reminders.size() <= 1000
+        && workspace.progress is map && workspace.progress.size() <= 1000
+        && workspace.notificationsRead is bool
+        && workspace.theme in ['dark', 'light']
+        && workspace.settingsTab in [
+          'Profile', 'Learning', 'Membership', 'Trading profile',
+          'Notifications', 'Security'
+        ]
+        && workspace.preferences is map
+        && workspace.preferences.keys().hasOnly([
+          'displayName', 'region', 'weekly', 'completedVisible',
+          'announcements', 'sessions', 'newContent', 'experience',
+          'markets', 'preferredHours'
+        ])
+        && workspace.preferences.size() <= 10
+        && workspace.preferences.displayName is string
+        && workspace.preferences.displayName.size() <= 100
+        && workspace.preferences.region is string
+        && workspace.preferences.region.size() <= 100
+        && workspace.preferences.weekly is bool
+        && workspace.preferences.completedVisible is bool
+        && workspace.preferences.announcements is bool
+        && workspace.preferences.sessions is bool
+        && workspace.preferences.newContent is bool
+        && workspace.preferences.experience is string
+        && workspace.preferences.experience.size() <= 100
+        && workspace.preferences.markets is string
+        && workspace.preferences.markets.size() <= 100
+        && workspace.preferences.preferredHours is string
+        && workspace.preferences.preferredHours.size() <= 100;
+    }
+
+    match /users/{userId}/workspace/state {
+      allow read: if ownsUser(userId);
+      allow create, update: if ownsUser(userId) && validWorkspaceDocument();
+      allow delete: if ownsUser(userId);
+    }
+  }
+}
