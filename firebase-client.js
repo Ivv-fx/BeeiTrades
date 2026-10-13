@@ -3,11 +3,9 @@ import {
   GoogleAuthProvider,
   browserLocalPersistence,
   getAuth,
-  getRedirectResult,
   onAuthStateChanged,
   setPersistence,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
@@ -48,16 +46,7 @@ export function subscribeToAuth(callback, onError) {
 export async function signInWithGoogle() {
   if (!auth) throw new Error("Firebase is not configured.");
   await setPersistence(auth, browserLocalPersistence);
-  if (window.matchMedia("(max-width: 700px)").matches) {
-    await signInWithRedirect(auth, googleProvider);
-    return;
-  }
   await signInWithPopup(auth, googleProvider);
-}
-
-export async function finishRedirectSignIn() {
-  if (!auth) return null;
-  return getRedirectResult(auth);
 }
 
 export async function signOutUser() {
