@@ -39,6 +39,7 @@ svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width:
 .side-label { padding: 7px 10px; }
 .side-nav { display: grid; gap: 3px; }
 .side-nav .nav-glow-button { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; width: 100%; min-height: 39px; padding: 0 10px; color: #9ca1a8; text-align: left; transition: background .15s, color .15s; }
+.side-nav .nav-glow-button > span { display: flex; flex: 1; flex-direction: row; align-items: center; gap: 12px; min-width: 0; }
 .nav-icon { display: grid; flex: 0 0 17px; place-items: center; width: 17px; color: #858b94; font-size: 17px; }
 .nav-icon.active { color: #80a5ff; }
 .nav-count { margin-left: auto; color: #848a91; font-size: 10px; }
