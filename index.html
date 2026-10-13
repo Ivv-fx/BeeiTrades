@@ -9,22 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="/main.tsx"></script>
   </head>
   <body>
+    <div id="ambient-background-root" aria-hidden="true"></div>
     <div class="app-shell">
       <aside class="sidebar" id="sidebar">
         <a class="brand" href="#/home" aria-label="Namoh Trades home"><span class="brand-symbol">✳</span><span>Namoh Trades</span></a>
         <div class="side-label">WORKSPACE</div>
-        <nav class="side-nav" aria-label="Main navigation">
-          <a href="#/home" data-route="home"><span class="nav-icon">⌂</span>Home</a>
-          <a href="#/learn" data-route="learn"><span class="nav-icon">▤</span>Learn<span class="nav-count">18</span></a>
-          <a href="#/videos" data-route="videos"><span class="nav-icon">▷</span>Recordings</a>
-          <a href="#/saved" data-route="saved"><span class="nav-icon">▣</span>Saved</a>
-          <a href="#/sessions" data-route="sessions"><span class="nav-icon">◷</span>Live sessions</a>
-          <a href="#/perks" data-route="perks"><span class="nav-icon">◇</span>Member perks</a>
-        </nav>
+        <nav class="side-nav" id="side-nav-root" aria-label="Main navigation"></nav>
         <div class="sidebar-divider"></div>
         <div class="membership-mini">
           <div class="plan-orbit">✳</div>
@@ -53,10 +46,10 @@
       </main>
 
       <nav class="bottom-nav" aria-label="Primary navigation">
-        <a href="#/home" data-route="home"><span>⌂</span><small>Home</small></a>
-        <a href="#/learn" data-route="learn"><span>▤</span><small>Learn</small></a>
-        <a href="#/videos" data-route="videos"><span>▷</span><small>Videos</small></a>
-        <a href="#/saved" data-route="saved"><span>▣</span><small>Saved</small></a>
+        <a href="#/home" data-mobile-route="home"><span>⌂</span><small>Home</small></a>
+        <a href="#/learn" data-mobile-route="learn"><span>▤</span><small>Learn</small></a>
+        <a href="#/videos" data-mobile-route="videos"><span>▷</span><small>Videos</small></a>
+        <a href="#/saved" data-mobile-route="saved"><span>▣</span><small>Saved</small></a>
         <button data-action="more"><span>···</span><small>More</small></button>
       </nav>
     </div>

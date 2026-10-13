@@ -117,7 +117,7 @@ function titleFor(route) {
   return ({ home: "Home", learn: "Learn", videos: "Recordings", saved: "Saved", sessions: "Live sessions", perks: "Member perks", lesson: "Lesson", category: "Learning path", membership: "Membership", settings: "Settings", upgrade: "Membership" })[route] || "Home";
 }
 function activeNav(route) {
-  document.querySelectorAll("[data-route]").forEach((link) => link.classList.toggle("active", link.dataset.route === route || (route === "lesson" || route === "category") && link.dataset.route === "learn" || route === "upgrade" && link.dataset.route === "home"));
+  document.querySelectorAll("[data-mobile-route]").forEach((link) => link.classList.toggle("active", link.dataset.mobileRoute === route || (route === "lesson" || route === "category") && link.dataset.mobileRoute === "learn" || route === "upgrade" && link.dataset.mobileRoute === "home"));
   document.querySelector("#mobile-title").textContent = titleFor(route);
 }
 function header(title) {
